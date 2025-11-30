@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FiUpload, FiPlay, FiCheckCircle, FiCopy, FiZap, FiFilm, FiImage, FiDownload, FiX , FiVideo} from "react-icons/fi";
+import { API_ROOT, Scene, isVideoFile } from "./utils";
+
 
 
 // Animation variants
