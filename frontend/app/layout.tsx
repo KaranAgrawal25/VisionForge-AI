@@ -119,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     style={{ padding: "8px 14px" }}
                   >
                     <FiGithub size={18} />
-                    <span style={{ display: "none", "@media (min-width: 768px)": { display: "inline" } }}>
+                    <span className="hidden md:inline">
                       GitHub
                     </span>
                   </a>
