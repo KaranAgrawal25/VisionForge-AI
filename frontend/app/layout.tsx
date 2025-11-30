@@ -4,24 +4,8 @@ import React from "react";
 import BackgroundProvider from "./BackgroundProvider";
 import { FiZap, FiFilm, FiGithub, FiTwitter, FiStar } from "react-icons/fi";
 import Image from "next/image";
+import { metadata } from "./metadata";
 
-
-export const metadata = {
-  title: "VisionForge — AI Cinematic Video Generator",
-  description: "Transform ideas into stunning cinematic videos with AI-powered prompts and automated rendering",
-  keywords: "AI video, video generator, cinematic AI, automated video creation, AI filmmaking",
-  authors: [{ name: "Karan" }],
-  openGraph: {
-    title: "VisionForge — AI Cinematic Video Generator",
-    description: "Transform ideas into stunning cinematic videos with AI",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "VisionForge — AI Cinematic Video Generator",
-    description: "Transform ideas into stunning cinematic videos with AI",
-  },
-};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
