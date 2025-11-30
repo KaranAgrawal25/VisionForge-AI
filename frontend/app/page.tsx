@@ -4,14 +4,6 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { FiUpload, FiPlay, FiCheckCircle, FiCopy, FiZap, FiFilm, FiImage, FiDownload, FiX , FiVideo} from "react-icons/fi";
 
-const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || "http://localhost:8000";
-
-type Scene = { narration: string; image_prompt: string };
-
-function isVideoFile(filename: string) {
-  const videoExtensions = [".mp4", ".mov", ".avi", ".mkv", ".webm"];
-  return videoExtensions.some(ext => filename.toLowerCase().endsWith(ext));
-}
 
 // Animation variants
 const cardVariants = {
