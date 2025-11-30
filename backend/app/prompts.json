@@ -1,0 +1,39 @@
+{
+  "scenes": [
+    {
+      "narration": "In 2050, a world once vibrant lies submerged beneath rising tides.",
+      "image_prompt": "Aerial view of a flooded city skyline at sunset, warm golden light reflecting on the water, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "dramatic"
+    },
+    {
+      "narration": "Hope flickers as a final rescue mission begins in the depths of despair.",
+      "image_prompt": "Close-up of a rescue team's determined faces, shadows cast by flickering lights, capturing urgency, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "intense"
+    },
+    {
+      "narration": "Desperate cries echo through the water, but will anyone hear them?",
+      "image_prompt": "Underwater shot of hands reaching out towards the surface, sunlight filtering through water, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "sad"
+    },
+    {
+      "narration": "With every second counting, they race against a ticking clock.",
+      "image_prompt": "High-speed action of rescue boats navigating treacherous waters, splashes and urgency in every frame, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "excited"
+    },
+    {
+      "narration": "Time is running out, but hope is a powerful tide.",
+      "image_prompt": "Wide shot of the rescue team gathering supplies at dawn, a soft glow illuminating their resolve, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "cheerful"
+    },
+    {
+      "narration": "Will they find the lost, or will the ocean claim them forever?",
+      "image_prompt": "Dramatic shot of the ocean waves crashing against a crumbling city, stormy skies overhead, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "mysterious"
+    },
+    {
+      "narration": "As the last boat sails, who will be saved from the abyss?",
+      "image_prompt": "Silhouette of a lone boat against a fiery sunset, the horizon fading into darkness, 9:16 aspect ratio., cinematic lighting, filmic color grading, dramatic rim light, ultra-detailed, vertical 9:16",
+      "emotion": "neutral"
+    }
+  ]
+}

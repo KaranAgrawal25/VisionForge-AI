@@ -1,0 +1,7 @@
+node_modules/
+.next/
+.vscode/
+.DS_Store
+backend/app/final_video.mp4
+backend/app/*temp*
+backend/app/.env

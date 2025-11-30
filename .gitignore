@@ -1,0 +1,34 @@
+node_modules/
+.next/
+.vscode/
+.DS_Store
+backend/app/final_video.mp4
+backend/app/*temp*
+backend/app/.env
+# Environment files (do NOT commit)
+.env
+.env.*
+*.env
+*.env.local
+!.env.example
+!.env.local.example
+
+# Python
+__pycache__/
+*.pyc
+venv/
+venv_*/
+
+# Node / Next
+frontend/.next/
+frontend/node_modules/
+
+# Local outputs / uploads
+backend/uploads/
+backend/outputs/
+backend/images_user/
+backend/music/
+
+# OS
+.DS_Store
+Thumbs.db
