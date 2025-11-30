@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FiUpload, FiPlay, FiCheckCircle, FiCopy, FiZap, FiFilm, FiImage, FiDownload, FiX , FiVideo} from "react-icons/fi";
 
 const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || "http://localhost:8000";
@@ -147,7 +147,7 @@ export default function Page() {
       style={{display:"grid", gap: 24}}
     >
       {/* HERO SECTION - Title Input */}
-      <motion.div variants={cardVariants} className="card">
+      <motion.div className="card" variants={cardVariants}>
         <div style={{display:"grid", gridTemplateColumns: "1fr 400px", gap: 24}}>
           <div>
             <div className="kicker">
