@@ -1,21 +1,21 @@
 import "./globals.css";
 import React from "react";
 import BackgroundProvider from "./BackgroundProvider";
-import { FiZap, FiFilm, FiGithub, FiTwitter, FiStar, FiLinkedin } from "react-icons/fi";
+import { FiZap, FiFilm, FiGithub, FiTwitter } from "react-icons/fi";
 
 export const metadata = {
-  title: "VideoGPT — AI Cinematic Video Generator",
+  title: "VisionForge — AI Cinematic Video Generator",
   description: "Transform ideas into stunning cinematic videos with AI-powered prompts and automated rendering",
   keywords: "AI video, video generator, cinematic AI, automated video creation, AI filmmaking",
   authors: [{ name: "Karan" }],
   openGraph: {
-    title: "VideoGPT — AI Cinematic Video Generator",
+    title: "VisionForge — AI Cinematic Video Generator",
     description: "Transform ideas into stunning cinematic videos with AI",
     type: "website",
   },
-  linkedin: {
+  twitter: {
     card: "summary_large_image",
-    title: "VisionAI — AI Cinematic Video Generator",
+    title: "VisionForge — AI Cinematic Video Generator",
     description: "Transform ideas into stunning cinematic videos with AI",
   },
 };
@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text"
                     }}>
-                      VideoGPT
+                      VisionForge
                     </div>
                     <div style={{
                       fontSize: "0.7rem",
@@ -104,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   gap: 16
                 }}>
                   <a 
-                    href="https://github.com/KaranAgrawal25" 
+                    href="https://github.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn btn-ghost"
@@ -116,13 +116,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </span>
                   </a>
                   <a 
-                    href="https://www.linkedin.com/in/karanagrawal25/" 
+                    href="https://twitter.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn btn-ghost"
                     style={{ padding: "8px 14px" }}
                   >
-                    <FiLinkedin size={18} />
+                    <FiTwitter size={18} />
                   </a>
                   <div style={{
                     padding: "6px 12px",
@@ -256,7 +256,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             {/* Main Content */}
-            <main className="container" style={{ position: "relative" }}>
+            <main className="container">
               {children}
             </main>
 
@@ -300,7 +300,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text"
                       }}>
-                        VideoGPT
+                        VisionForge
                       </div>
                     </div>
                     <p className="small-muted" style={{ lineHeight: 1.6 }}>
@@ -355,7 +355,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       gap: 12
                     }}>
                       <a 
-                        href="https://github.com/KaranAgrawal25" 
+                        href="https://github.com" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="small-muted"
@@ -370,7 +370,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         GitHub
                       </a>
                       <a 
-                        href="https://www.linkedin.com/in/karanagrawal25/" 
+                        href="https://twitter.com" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="small-muted"
@@ -381,8 +381,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           textDecoration: "none"
                         }}
                       >
-                        <FiLinkedin size={16} />
-                        Linkedin
+                        <FiTwitter size={16} />
+                        Twitter
                       </a>
                     </div>
                   </div>
@@ -399,7 +399,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   gap: 16
                 }}>
                   <div className="footer-note">
-                    © 2025 VideoGPT by Karan. Powered by AI.
+                    © 2025 VisionForge by Karan. Powered by AI.
                   </div>
                   <div style={{
                     display: "flex",
