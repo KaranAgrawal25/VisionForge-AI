@@ -1,11 +1,24 @@
-"use client";
 import "./globals.css";
 import React from "react";
 import BackgroundProvider from "./BackgroundProvider";
-import { FiZap, FiFilm, FiGithub, FiTwitter, FiStar } from "react-icons/fi";
-import Image from "next/image";
-import { metadata } from "./metadata";
+import { FiZap, FiFilm, FiGithub, FiTwitter, FiStar, FiLinkedin } from "react-icons/fi";
 
+export const metadata = {
+  title: "VideoGPT — AI Cinematic Video Generator",
+  description: "Transform ideas into stunning cinematic videos with AI-powered prompts and automated rendering",
+  keywords: "AI video, video generator, cinematic AI, automated video creation, AI filmmaking",
+  authors: [{ name: "Karan" }],
+  openGraph: {
+    title: "VideoGPT — AI Cinematic Video Generator",
+    description: "Transform ideas into stunning cinematic videos with AI",
+    type: "website",
+  },
+  linkedin: {
+    card: "summary_large_image",
+    title: "VisionAI — AI Cinematic Video Generator",
+    description: "Transform ideas into stunning cinematic videos with AI",
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -50,23 +63,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   alignItems: "center",
                   gap: 12
                 }}>
-                  <div className="logo-glow" 
-                  style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 10,
-                  overflow: "hidden"
-              }}
-              >
-                  <Image 
-                  src="/visionforge-logo.png" 
-                  alt="VisionForge Logo"
-                  width={40}
-                  height={40}
-                  style={{ objectFit: "cover" }}
-              />
+                  <div className="logo-glow" style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: "linear-gradient(135deg, #a78bfa, #06b6d4)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}>
+                    <FiFilm size={22} color="#030712" />
                   </div>
-
                   <div>
                     <div style={{
                       fontWeight: 900,
@@ -77,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text"
                     }}>
-                      VisionForge AI
+                      VideoGPT
                     </div>
                     <div style={{
                       fontSize: "0.7rem",
@@ -97,25 +104,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   gap: 16
                 }}>
                   <a 
-                    href="https://github.com" 
+                    href="https://github.com/KaranAgrawal25" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn btn-ghost"
                     style={{ padding: "8px 14px" }}
                   >
                     <FiGithub size={18} />
-                    <span className="hidden md:inline">
+                    <span style={{ display: "none", "@media (min-width: 768px)": { display: "inline" } }}>
                       GitHub
                     </span>
                   </a>
                   <a 
-                    href="https://twitter.com" 
+                    href="https://www.linkedin.com/in/karanagrawal25/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn btn-ghost"
                     style={{ padding: "8px 14px" }}
                   >
-                    <FiTwitter size={18} />
+                    <FiLinkedin size={18} />
                   </a>
                   <div style={{
                     padding: "6px 12px",
@@ -275,21 +282,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       marginBottom: 16
                     }}>
                       <div style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      overflow: "hidden"
-                    }}
-                    >
-                      <Image
-                      src="/visionforge-logo.png"   // change if your file name is different
-                      alt="VisionForge Logo"
-                      width={36}
-                      height={36}
-                      style={{ objectFit: "cover" }}
-                      />
-                  </div>
-
+                        width: 36,
+                        height: 36,
+                        borderRadius: 8,
+                        background: "linear-gradient(135deg, #a78bfa, #06b6d4)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                      }}>
+                        <FiFilm size={18} color="#030712" />
+                      </div>
                       <div style={{
                         fontWeight: 900,
                         fontSize: "1.1rem",
@@ -298,7 +300,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text"
                       }}>
-                        VisionForge AI
+                        VideoGPT
                       </div>
                     </div>
                     <p className="small-muted" style={{ lineHeight: 1.6 }}>
@@ -353,7 +355,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       gap: 12
                     }}>
                       <a 
-                        href="https://github.com" 
+                        href="https://github.com/KaranAgrawal25" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="small-muted"
@@ -368,7 +370,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         GitHub
                       </a>
                       <a 
-                        href="https://twitter.com" 
+                        href="https://www.linkedin.com/in/karanagrawal25/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="small-muted"
@@ -379,8 +381,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           textDecoration: "none"
                         }}
                       >
-                        <FiTwitter size={16} />
-                        Twitter
+                        <FiLinkedin size={16} />
+                        Linkedin
                       </a>
                     </div>
                   </div>
@@ -397,7 +399,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   gap: 16
                 }}>
                   <div className="footer-note">
-                    © 2025 VisionForge by Karan. Powered by AI.
+                    © 2025 VideoGPT by Karan. Powered by AI.
                   </div>
                   <div style={{
                     display: "flex",

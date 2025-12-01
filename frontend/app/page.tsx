@@ -1,13 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
-import { FiUpload, FiPlay, FiCheckCircle, FiCopy, FiZap, FiFilm, FiImage, FiDownload, FiX , FiVideo} from "react-icons/fi";
-import { API_ROOT, Scene, isVideoFile } from "./utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiUpload, FiPlay, FiCheckCircle, FiCopy, FiZap, FiFilm, FiImage, FiDownload, FiX, FiVideo } from "react-icons/fi";
 
 
 
-// Animation variants
+const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || "http://localhost:8000";
+
+type Scene = { narration: string; image_prompt: string };
+
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
@@ -24,6 +26,12 @@ const staggerChildren = {
     }
   }
 };
+
+// Helper function to check if file is video
+function isVideoFile(filename: string): boolean {
+  const videoExts = ['.mp4', '.mov', '.avi', '.mkv', '.webm'];
+  return videoExts.some(ext => filename.toLowerCase().endsWith(ext));
+}
 
 export default function Page() {
   const [step, setStep] = useState<number>(1);
@@ -127,12 +135,6 @@ export default function Page() {
     setTimeout(() => setCopied(null), 2000);
   }
 
-  function fmtSec(s:number){
-    const m = Math.floor(s/60).toString().padStart(2,"0");
-    const sec = Math.floor(s%60).toString().padStart(2,"0");
-    return `${m}:${sec}`;
-  }
-
   return (
     <motion.div 
       initial="hidden"
@@ -141,7 +143,7 @@ export default function Page() {
       style={{display:"grid", gap: 24}}
     >
       {/* HERO SECTION - Title Input */}
-      <motion.div className="card" variants={cardVariants}>
+      <motion.div variants={cardVariants} className="card">
         <div style={{display:"grid", gridTemplateColumns: "1fr 400px", gap: 24}}>
           <div>
             <div className="kicker">
@@ -152,7 +154,7 @@ export default function Page() {
             <input
               value={title}
               onChange={(e)=>setTitle(e.target.value)}
-              placeholder="Type a cinematic title – e.g. 'Midnight Decisions'"
+              placeholder="Type a cinematic title — e.g. 'Midnight Decisions'"
               className="glass"
               style={{
                 width:"100%", 
@@ -260,365 +262,29 @@ export default function Page() {
         </div>
       </motion.div>
 
-      {/* FUTURISTIC SCENES EDITOR */}
+      {/* SCENES SECTION - Condensed */}
       <AnimatePresence>
         {scenes.length > 0 && (
           <motion.div 
             variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
             className="card"
-            style={{
-              background: "linear-gradient(135deg, rgba(139,92,246,0.03), rgba(6,182,212,0.02))",
-              border: "1px solid rgba(167,139,250,0.15)"
-            }}
           >
-            {/* Header */}
-            <div style={{
-              display:"flex", 
-              justifyContent:"space-between", 
-              alignItems:"center", 
-              marginBottom: 28,
-              paddingBottom: 20,
-              borderBottom: "1px solid rgba(167,139,250,0.1)"
-            }}>
+            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom: 20}}>
               <div>
-                <div style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "6px 14px",
-                  borderRadius: 8,
-                  background: "rgba(167,139,250,0.1)",
-                  border: "1px solid rgba(167,139,250,0.3)",
-                  marginBottom: 12,
-                  fontSize: "0.75rem",
-                  fontWeight: 800,
-                  letterSpacing: "0.08em",
-                  color: "#a78bfa"
-                }}>
-                  <FiZap size={12} />
-                  AI GENERATED
-                </div>
-                <div className="h2" style={{
-                  marginBottom: 8,
-                  fontSize: "1.35rem",
-                  background: "linear-gradient(135deg, #f8fafc, #a78bfa)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text"
-                }}>
-                  Prompts & Narrations
+                <div className="h2" style={{marginBottom: 6}}>
+                  📝 {scenes.length} Scenes Generated
                 </div>
                 <div className="small-muted">
-                  {scenes.length} cinematic scenes ready • Edit before rendering
+                  Review scenes • Copy prompts • Continue when ready
                 </div>
               </div>
               <button 
-                className="btn btn-ghost" 
-                onClick={()=>{ setScenes([]); setStep(1); }}
-                style={{
-                  background: "rgba(239,68,68,0.1)",
-                  borderColor: "rgba(239,68,68,0.3)",
-                  color: "#ef4444"
-                }}
+                className="btn btn-primary" 
+                onClick={()=>setStep(2)}
               >
-                <FiX /> Reset All
+                <FiPlay /> Continue
               </button>
             </div>
-
-            {/* Scenes Grid */}
-            <div className="scenes-grid">
-              {scenes.map((s,i)=>(
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ 
-                    delay: i * 0.08,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  className="scene-card"
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-                    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-                  }}
-                >
-                  {/* Floating particles */}
-                  <div className="particle" style={{
-                    left: '20%',
-                    top: '30%'
-                  }} />
-                  <div className="particle" style={{
-                    right: '25%',
-                    top: '60%'
-                  }} />
-                  <div className="particle" style={{
-                    left: '70%',
-                    bottom: '40%'
-                  }} />
-
-                  <div className="scene-content">
-                    {/* Left Column - Text Content */}
-                    <div>
-                      {/* Scene Header */}
-                      <div className="scene-header">
-                        <div className="scene-badge">{i + 1}</div>
-                        <div className="scene-title">
-                          Scene {i + 1}
-                        </div>
-                        <div style={{
-                          flex: 1,
-                          height: 1,
-                          background: "linear-gradient(90deg, rgba(167,139,250,0.3), transparent)"
-                        }} />
-                      </div>
-                      
-                      {/* Narration Section */}
-                      <div style={{ marginBottom: 20 }}>
-                        <div className="cyber-label">
-                          <FiFilm size={10} />
-                          Narration
-                        </div>
-                        <textarea 
-                          defaultValue={s.narration} 
-                          onBlur={(e)=>{ 
-                            const arr=[...scenes]; 
-                            arr[i].narration = e.target.value; 
-                            setScenes(arr); 
-                          }} 
-                          rows={2} 
-                          className="cyber-textarea"
-                          placeholder="Enter scene narration..."
-                          style={{
-                            minHeight: 80
-                          }}
-                        />
-                      </div>
-                      
-                      {/* Cyber Divider */}
-                      <div className="cyber-divider" />
-                      
-                      {/* Image Prompt Section */}
-                      <div>
-                        <div className="cyber-label">
-                          <FiImage size={10} />
-                          Image Prompt
-                        </div>
-                        <textarea 
-                          defaultValue={s.image_prompt} 
-                          onBlur={(e)=>{ 
-                            const arr=[...scenes]; 
-                            arr[i].image_prompt = e.target.value; 
-                            setScenes(arr); 
-                          }} 
-                          rows={4} 
-                          className="cyber-textarea"
-                          placeholder="Enter detailed image prompt..."
-                          style={{
-                            minHeight: 120
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Right Column - Preview & Actions */}
-                    <div style={{
-                      display:"flex", 
-                      flexDirection:"column", 
-                      gap: 16
-                    }}>
-                      {/* Preview Label */}
-                      <div style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between"
-                      }}>
-                        <div className="cyber-label">
-                          Preview
-                        </div>
-                        <div style={{
-                          fontSize: "0.75rem",
-                          color: "var(--muted)",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 4
-                        }}>
-                          <div style={{
-                            width: 6,
-                            height: 6,
-                            borderRadius: "50%",
-                            background: "#10b981",
-                            boxShadow: "0 0 10px #10b981"
-                          }} />
-                          Live
-                        </div>
-                      </div>
-
-                      {/* Holographic Preview Box */}
-                      <div className="holo-preview">
-                        <div style={{
-                          position: "relative",
-                          zIndex: 1,
-                          textAlign: "center"
-                        }}>
-                          <motion.div
-                            animate={{ 
-                              scale: [1, 1.1, 1],
-                              opacity: [0.3, 0.5, 0.3]
-                            }}
-                            transition={{ 
-                              duration: 3,
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            }}
-                          >
-                            <FiImage size={56} style={{
-                              color: "var(--accent1)",
-                              opacity: 0.4,
-                              marginBottom: 12
-                            }} />
-                          </motion.div>
-                          <div style={{
-                            fontSize: "0.85rem",
-                            fontWeight: 600,
-                            color: "var(--muted)",
-                            marginBottom: 4
-                          }}>
-                            Scene {i + 1}
-                          </div>
-                          <div style={{
-                            fontSize: "0.75rem",
-                            color: "rgba(148,163,184,0.5)"
-                          }}>
-                            Upload image to preview
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Action Buttons */}
-                      <div style={{
-                        display:"grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: 10
-                      }}>
-                        <button 
-                          className={`energy-copy-btn ${copied === i ? "copied" : ""}`}
-                          onClick={()=>copyPrompt(i, s.image_prompt)}
-                          style={{
-                            justifyContent: "center"
-                          }}
-                        >
-                          {copied === i ? (
-                            <>
-                              <FiCheckCircle size={14} />
-                              Copied!
-                            </>
-                          ) : (
-                            <>
-                              <FiCopy size={14} />
-                              Copy
-                            </>
-                          )}
-                        </button>
-                        
-                        <button 
-                          className="energy-copy-btn"
-                          onClick={()=>copyPrompt(i, s.narration)}
-                          style={{
-                            justifyContent: "center"
-                          }}
-                        >
-                          <FiFilm size={14} />
-                          Text
-                        </button>
-                      </div>
-
-                      {/* Scene Info */}
-                      <div style={{
-                        padding: 12,
-                        borderRadius: 10,
-                        background: "rgba(0,0,0,0.3)",
-                        border: "1px solid rgba(167,139,250,0.1)"
-                      }}>
-                        <div style={{
-                          fontSize: "0.75rem",
-                          color: "var(--muted)",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          marginBottom: 6
-                        }}>
-                          <span>Characters</span>
-                          <span style={{ fontWeight: 700, color: "#a78bfa" }}>
-                            {s.narration.length}
-                          </span>
-                        </div>
-                        <div style={{
-                          fontSize: "0.75rem",
-                          color: "var(--muted)",
-                          display: "flex",
-                          justifyContent: "space-between"
-                        }}>
-                          <span>Prompt Length</span>
-                          <span style={{ fontWeight: 700, color: "#06b6d4" }}>
-                            {s.image_prompt.length}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Bottom Action Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: scenes.length * 0.08 + 0.2 }}
-              style={{
-                marginTop: 28,
-                padding: 20,
-                borderRadius: 14,
-                background: "linear-gradient(135deg, rgba(167,139,250,0.08), rgba(6,182,212,0.05))",
-                border: "1px solid rgba(167,139,250,0.2)",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexWrap: "wrap",
-                gap: 16
-              }}
-            >
-              <div>
-                <div style={{
-                  fontWeight: 700,
-                  marginBottom: 4,
-                  color: "var(--text-primary)"
-                }}>
-                  Ready to create?
-                </div>
-                <div className="small-muted">
-                  All scenes configured • Proceed to upload images
-                </div>
-              </div>
-              <button
-                className="btn btn-primary"
-                onClick={()=> setStep(2)}
-                style={{
-                  padding: "12px 28px",
-                  fontSize: "1rem"
-                }}
-              >
-                <FiPlay />
-                Continue to Upload
-                <FiZap size={16} style={{ marginLeft: 4 }} />
-              </button>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -787,7 +453,7 @@ export default function Page() {
       <motion.div variants={cardVariants} className="card">
         <div style={{display:"grid", gridTemplateColumns: "1fr 460px", gap: 24}}>
           <div>
-            <div className="h2" style={{marginBottom: 6}}>Build & Render</div>
+            <div className="h2" style={{marginBottom: 6}}>🎬 Build & Render</div>
             <div className="small-muted" style={{marginBottom: 20}}>
               Start the render and monitor progress in real-time
             </div>
@@ -796,7 +462,7 @@ export default function Page() {
               <button
                 className={`btn btn-primary ${btnLoading["build"] ? "loading" : ""}`}
                 onClick={startBuild}
-                disabled={!!btnLoading["build"]}
+                disabled={!!btnLoading["build"] || !uploadId}
               >
                 <FiPlay/> Start Build
                 <span className="dot" />
@@ -804,7 +470,7 @@ export default function Page() {
 
               <button 
                 className="btn btn-ghost" 
-                onClick={()=>setStep(3)}
+                onClick={()=>setStep(2)}
               >
                 Back to Upload
               </button>
@@ -964,8 +630,8 @@ export default function Page() {
                     </div>
                     <div className="small-muted">
                       {status?.status === "building" 
-                        ? "This may take a minute depending on images" 
-                        : "Start build to render the video"}
+                        ? "Processing your video..." 
+                        : "Upload media and start build"}
                     </div>
                   </div>
                 </div>
