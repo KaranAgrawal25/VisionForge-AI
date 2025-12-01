@@ -2,20 +2,21 @@ import "./globals.css";
 import React from "react";
 import BackgroundProvider from "./BackgroundProvider";
 import { FiZap, FiFilm, FiGithub, FiTwitter } from "react-icons/fi";
+import Image from "next/image";
 
 export const metadata = {
-  title: "VisionForge — AI Cinematic Video Generator",
+  title: "VisionForge AI — AI Cinematic Video Generator",
   description: "Transform ideas into stunning cinematic videos with AI-powered prompts and automated rendering",
   keywords: "AI video, video generator, cinematic AI, automated video creation, AI filmmaking",
   authors: [{ name: "Karan" }],
   openGraph: {
-    title: "VisionForge — AI Cinematic Video Generator",
+    title: "VisionForge AI — AI Cinematic Video Generator",
     description: "Transform ideas into stunning cinematic videos with AI",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "VisionForge — AI Cinematic Video Generator",
+    title: "VisionForge AI — AI Cinematic Video Generator",
     description: "Transform ideas into stunning cinematic videos with AI",
   },
 };
@@ -63,17 +64,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   alignItems: "center",
                   gap: 12
                 }}>
-                  <div className="logo-glow" style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 10,
-                    background: "linear-gradient(135deg, #a78bfa, #06b6d4)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                  }}>
-                    <FiFilm size={22} color="#030712" />
+                 <div className="logo-glow" 
+                  style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 10,
+                  overflow: "hidden"
+                }}
+                >
+                  <Image 
+                  src="/visionforge-logo.png" 
+                  alt="VisionForge Logo"
+                  width={40}
+                  height={40}
+                  style={{ objectFit: "cover" }}
+                />
                   </div>
+
                   <div>
                     <div style={{
                       fontWeight: 900,
@@ -84,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text"
                     }}>
-                      VisionForge
+                      VisionForge AI
                     </div>
                     <div style={{
                       fontSize: "0.7rem",
@@ -300,7 +307,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text"
                       }}>
-                        VisionForge
+                        VisionForge AI
                       </div>
                     </div>
                     <p className="small-muted" style={{ lineHeight: 1.6 }}>
@@ -399,7 +406,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   gap: 16
                 }}>
                   <div className="footer-note">
-                    © 2025 VisionForge by Karan. Powered by AI.
+                    © 2025 VisionForge AI by Karan. Powered by AI.
                   </div>
                   <div style={{
                     display: "flex",
