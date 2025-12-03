@@ -292,12 +292,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         width: 36,
                         height: 36,
                         borderRadius: 8,
-                        background: "linear-gradient(135deg, #a78bfa, #06b6d4)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
+                        overflow: "hidden"
                       }}>
-                        <FiFilm size={18} color="#030712" />
+                        <Image 
+                          src="/visionforge-logo.png" 
+                          alt="VisionForge Logo"
+                          width={36}
+                          height={36}
+                          style={{ objectFit: "cover" }}
+                        />
                       </div>
                       <div style={{
                         fontWeight: 900,

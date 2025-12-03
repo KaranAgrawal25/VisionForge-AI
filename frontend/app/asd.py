@@ -8,7 +8,6 @@ const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || "http://localhost:8000";
 
 type Scene = { narration: string; image_prompt: string };
 
-// Animation variants
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
@@ -128,12 +127,6 @@ export default function Page() {
     setTimeout(() => setCopied(null), 2000);
   }
 
-  function fmtSec(s:number){
-    const m = Math.floor(s/60).toString().padStart(2,"0");
-    const sec = Math.floor(s%60).toString().padStart(2,"0");
-    return `${m}:${sec}`;
-  }
-
   return (
     <motion.div 
       initial="hidden"
@@ -141,7 +134,6 @@ export default function Page() {
       variants={staggerChildren}
       style={{display:"grid", gap: 24}}
     >
-      {/* HERO SECTION - Title Input */}
       <motion.div variants={cardVariants} className="card">
         <div style={{display:"grid", gridTemplateColumns: "1fr 400px", gap: 24}}>
           <div>
@@ -153,7 +145,7 @@ export default function Page() {
             <input
               value={title}
               onChange={(e)=>setTitle(e.target.value)}
-              placeholder="Type a cinematic title -“ e.g. 'Midnight Decisions'"
+              placeholder="Type a cinematic title — e.g. 'Midnight Decisions'"
               className="glass"
               style={{
                 width:"100%", 
@@ -167,26 +159,17 @@ export default function Page() {
             />
             
             <div style={{display:"flex", gap: 14, alignItems:"center", flexWrap: "wrap"}}>
-              <select
-  value={styleChoice}
-  onChange={(e) => setStyleChoice(e.target.value)}
-  className="btn btn-ghost"
-  style={{
-    minWidth: 160,
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    borderRadius: 10,
-    padding: "10px 14px",
-    fontSize: "1rem",
-    fontWeight: 600,
-  }}
->
-  <option value="cinematic">🎬 Cinematic</option>
-  <option value="futuristic">🚀 Futuristic</option>
-  <option value="anime">🎌 Anime</option>
-  <option value="pixar">🎨 Pixar</option>
-</select>
-
+              <select 
+                value={styleChoice} 
+                onChange={(e)=>setStyleChoice(e.target.value)} 
+                className="btn btn-ghost"
+                style={{minWidth: 140}}
+              >
+                <option value="cinematic">🎬 Cinematic</option>
+                <option value="futuristic">🚀 Futuristic</option>
+                <option value="anime">🎑 Anime</option>
+                <option value="pixar">🎨 Pixar</option>
+              </select>
 
               <button
                 className={`btn btn-primary ${btnLoading["generate"] ? "loading" : ""}`}
@@ -204,7 +187,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Live Preview Panel */}
           <div className="card" style={{
             background: "linear-gradient(135deg, rgba(167,139,250,0.05), rgba(6,182,212,0.03))",
             border: "1px solid rgba(167,139,250,0.2)"
@@ -270,7 +252,6 @@ export default function Page() {
         </div>
       </motion.div>
 
-      {/* FUTURISTIC SCENES EDITOR */}
       <AnimatePresence>
         {scenes.length > 0 && (
           <motion.div 
@@ -284,7 +265,6 @@ export default function Page() {
               border: "1px solid rgba(167,139,250,0.15)"
             }}
           >
-            {/* Header */}
             <div style={{
               display:"flex", 
               justifyContent:"space-between", 
@@ -322,7 +302,7 @@ export default function Page() {
                   Prompts & Narrations
                 </div>
                 <div className="small-muted">
-                  {scenes.length} cinematic scenes ready â€¢ Edit before rendering
+                  {scenes.length} cinematic scenes ready • Edit before rendering
                 </div>
               </div>
               <button 
@@ -338,7 +318,6 @@ export default function Page() {
               </button>
             </div>
 
-            {/* Scenes Grid */}
             <div className="scenes-grid">
               {scenes.map((s,i)=>(
                 <motion.div 
@@ -351,32 +330,9 @@ export default function Page() {
                     stiffness: 100
                   }}
                   className="scene-card"
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-                    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-                  }}
                 >
-                  {/* Floating particles */}
-                  <div className="particle" style={{
-                    left: '20%',
-                    top: '30%'
-                  }} />
-                  <div className="particle" style={{
-                    right: '25%',
-                    top: '60%'
-                  }} />
-                  <div className="particle" style={{
-                    left: '70%',
-                    bottom: '40%'
-                  }} />
-
                   <div className="scene-content">
-                    {/* Left Column - Text Content */}
                     <div>
-                      {/* Scene Header */}
                       <div className="scene-header">
                         <div className="scene-badge">{i + 1}</div>
                         <div className="scene-title">
@@ -389,7 +345,6 @@ export default function Page() {
                         }} />
                       </div>
                       
-                      {/* Narration Section */}
                       <div style={{ marginBottom: 20 }}>
                         <div className="cyber-label">
                           <FiFilm size={10} />
@@ -411,10 +366,8 @@ export default function Page() {
                         />
                       </div>
                       
-                      {/* Cyber Divider */}
                       <div className="cyber-divider" />
                       
-                      {/* Image Prompt Section */}
                       <div>
                         <div className="cyber-label">
                           <FiImage size={10} />
@@ -437,13 +390,11 @@ export default function Page() {
                       </div>
                     </div>
 
-                    {/* Right Column - Preview & Actions */}
                     <div style={{
                       display:"flex", 
                       flexDirection:"column", 
                       gap: 16
                     }}>
-                      {/* Preview Label */}
                       <div style={{
                         display: "flex",
                         alignItems: "center",
@@ -470,7 +421,6 @@ export default function Page() {
                         </div>
                       </div>
 
-                      {/* Holographic Preview Box */}
                       <div className="holo-preview">
                         <div style={{
                           position: "relative",
@@ -511,7 +461,6 @@ export default function Page() {
                         </div>
                       </div>
                       
-                      {/* Action Buttons */}
                       <div style={{
                         display:"grid",
                         gridTemplateColumns: "1fr 1fr",
@@ -549,7 +498,6 @@ export default function Page() {
                         </button>
                       </div>
 
-                      {/* Scene Info */}
                       <div style={{
                         padding: 12,
                         borderRadius: 10,
@@ -586,7 +534,6 @@ export default function Page() {
               ))}
             </div>
 
-            {/* Bottom Action Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -613,7 +560,7 @@ export default function Page() {
                   Ready to create?
                 </div>
                 <div className="small-muted">
-                  All scenes configured â€¢ Proceed to upload images
+                  All scenes configured • Proceed to upload images
                 </div>
               </div>
               <button
@@ -633,291 +580,139 @@ export default function Page() {
         )}
       </AnimatePresence>
 
-{/* UPLOAD SECTION */}
-<motion.div
-  variants={cardVariants}
-  className="card"
-  style={{
-    background: "linear-gradient(135deg, rgba(139,92,246,0.03), rgba(6,182,212,0.02))",
-    border: "1px solid rgba(167,139,250,0.15)",
-    padding: 24,
-    marginTop: 20,
-  }}
->
-  {/* TOP HEADER */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 24,
-      paddingBottom: 20,
-      borderBottom: "1px solid rgba(167,139,250,0.1)",
-    }}
-  >
-    {/* LEFT SIDE */}
-    <div>
-      {/* BLUE TAG */}
-      <div
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "6px 14px",
-          borderRadius: 8,
-          background: "rgba(6,182,212,0.1)",
-          border: "1px solid rgba(6,182,212,0.3)",
-          marginBottom: 12,
-          fontSize: "0.75rem",
-          fontWeight: 800,
-          letterSpacing: "0.08em",
-          color: "#06b6d4",
-        }}
-      >
-        <FiUpload size={12} />
-        UPLOAD MEDIA
-      </div>
-
-      {/* TITLE */}
-      <div
-        className="h2"
-        style={{
-          marginBottom: 6,
-          fontSize: "1.35rem",
-          background: "linear-gradient(135deg, #f8fafc, #06b6d4)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        Upload Media ({files.length} files)
-      </div>
-
-      {/* SUB TEXT */}
-      <div className="small-muted" style={{ display: "flex", gap: 14 }}>
-        <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          🖼️ Images & 🎬 Videos supported
-        </span>
-        <span>• Order: scene_0, scene_1, scene_2…</span>
-      </div>
-    </div>
-
-    {/* RIGHT SIDE BUTTONS */}
-    <div style={{ display: "flex", gap: 10 }}>
-      {files.length > 0 && (
-        <button
-          className="btn btn-ghost"
-          onClick={() => {
-            setFiles([]);
-            setUploadId(null);
-          }}
-          style={{
-            background: "rgba(239,68,68,0.1)",
-            borderColor: "rgba(239,68,68,0.3)",
-            color: "#ef4444",
-          }}
-        >
-          <FiX /> Clear
-        </button>
-      )}
-
-      <button
-        className={`btn btn-primary ${btnLoading["upload"] ? "loading" : ""}`}
-        onClick={uploadFiles}
-        disabled={!!btnLoading["upload"] || files.length === 0}
-      >
-        <FiUpload /> Upload ({files.length})
-        <span className="dot" />
-      </button>
-    </div>
-  </div>
-
-  {/* DROPZONE */}
-  <div
-    className={`dropzone ${isDragging ? "dragover" : ""}`}
-    onDragOver={(e) => {
-      e.preventDefault();
-      setIsDragging(true);
-    }}
-    onDragLeave={() => setIsDragging(false)}
-    onDrop={(e) => {
-      e.preventDefault();
-      setIsDragging(false);
-      onDropFiles(e.dataTransfer.files);
-    }}
-    onClick={() => inputRef.current?.click()}
-    style={{
-      border: "1px dashed rgba(255,255,255,0.15)",
-      padding: "48px 20px",
-      borderRadius: 12,
-      marginBottom: 24,
-      cursor: "pointer",
-      textAlign: "center",
-    }}
-  >
-    <div style={{ opacity: 0.9 }}>
-      <div
-        style={{
+      <motion.div variants={cardVariants} className="card">
+        <div style={{
           display: "flex",
-          justifyContent: "center",
-          gap: 18,
-          marginBottom: 12,
-        }}
-      >
-        <FiImage size={32} />
-        <FiFilm size={32} />
-      </div>
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20
+        }}>
+          <div>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              marginBottom: 6
+            }}>
+              <FiUpload size={20} />
+              <div className="h2">Upload Media ({files.length} files)</div>
+            </div>
 
-      <div style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: 8 }}>
-        Drag & drop images/videos
-      </div>
+            <div className="small-muted" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                🖼️ Images & 🎥 Videos supported
+              </span>
+              <span>• Order: scene_0, scene_1, scene_2…</span>
+            </div>
+          </div>
 
-      <div className="small-muted" style={{ marginBottom: 12 }}>
-        JPG, PNG, MP4, MOV, WEBM • Mix & match
-      </div>
+          <div style={{ display: "flex", gap: 10 }}>
+            {files.length > 0 && (
+              <button 
+                className="btn btn-ghost" 
+                onClick={() => { setFiles([]); setUploadId(null); }}
+              >
+                <FiX /> Clear
+              </button>
+            )}
 
-      <button className="btn btn-ghost" style={{ pointerEvents: "none" }}>
-        Select Files
-      </button>
-    </div>
-
-    <input
-      ref={inputRef}
-      type="file"
-      multiple
-      accept="image/*,video/*"
-      onChange={handleFileSelect}
-      style={{ display: "none" }}
-    />
-  </div>
-
-  {/* FILE THUMBNAILS GRID */}
-  <AnimatePresence>
-    {files.length > 0 && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gap: 20,
-        }}
-      >
-        {files.map((file, index) => {
-          const isVideo = file.type.startsWith("video");
-          const previewURL = URL.createObjectURL(file);
-
-          return (
-            <motion.div
-              key={index}
-              className="thumb"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 14,
-                padding: 10,
-                width: "100%",
-              }}
+            <button
+              className={`btn btn-primary ${btnLoading["upload"] ? "loading" : ""}`}
+              onClick={uploadFiles}
+              disabled={!!btnLoading["upload"] || files.length === 0}
             >
-              {/* FILE HEADER */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: 6,
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "0.85rem",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: 140,
-                  }}
-                >
-                  {file.name}
-                </div>
+              <FiUpload/> Upload ({files.length})
+              <span className="dot" />
+            </button>
+          </div>
+        </div>
 
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeFile(index);
-                  }}
-                  style={{
-                    background: "rgba(239,68,68,0.1)",
-                    border: "1px solid rgba(239,68,68,0.3)",
-                    borderRadius: 6,
-                    padding: "4px 6px",
-                    color: "#ef4444",
-                  }}
-                >
-                  <FiX size={12} />
-                </button>
+        <div
+          className={`dropzone ${isDragging ? "dragover" : ""}`}
+          onDragOver={(e)=>{ e.preventDefault(); setIsDragging(true); }}
+          onDragLeave={()=>setIsDragging(false)}
+          onDrop={(e)=>{ e.preventDefault(); setIsDragging(false); onDropFiles(e.dataTransfer.files); }}
+          onClick={()=>inputRef.current?.click()}
+        >
+          <div style={{textAlign:"center", zIndex: 1}}>
+            <motion.div
+              animate={{ y: isDragging ? -5 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <FiUpload size={40} style={{opacity: 0.4, marginBottom: 12}} />
+              <div style={{fontWeight: 700, marginBottom: 8, fontSize: "1.05rem"}}>
+                {isDragging ? "Drop files here" : "Drag & drop images here"}
               </div>
-
-              {/* SIZE + TYPE */}
-              <div className="small-muted" style={{ marginBottom: 8 }}>
-                {Math.round(file.size / 1024)} KB •{" "}
-                {isVideo ? "🎬 Video" : "🖼️ Image"}
+              <div className="small-muted">
+                Drag & drop images/videos or click to select. Mix and match as needed.
               </div>
-
-              {/* THUMBNAIL PREVIEW */}
-              <div
-                style={{
-                  borderRadius: 10,
-                  overflow: "hidden",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  width: "100%",
-                  height: 260,
-                  background: "black",
-                }}
-              >
-                {isVideo ? (
-                  <video
-                    src={previewURL}
-                    muted
-                    playsInline
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.play()}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.pause();
-                      e.currentTarget.currentTime = 0;
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={previewURL}
-                    alt={file.name}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                  />
-                )}
-              </div>
+              <button className="btn btn-ghost" style={{pointerEvents: "none"}}>
+                Select Files
+              </button>
             </motion.div>
-          );
-        })}
+          </div>
+          <input 
+            ref={inputRef} 
+            type="file" 
+            multiple 
+            accept="image/*,video/*,.mp4,.mov,.avi,.mkv,.webm" 
+            onChange={handleFileSelect} 
+            style={{display:"none"}}
+          />
+        </div>
+
+        <AnimatePresence>
+          {files.length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="thumb-grid"
+            >
+              {files.map((f,i)=>(
+                <motion.div 
+                  key={i} 
+                  className="thumb"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <div style={{
+                    display:"flex", 
+                    justifyContent:"space-between", 
+                    alignItems:"center",
+                    marginBottom: 8
+                  }}>
+                    <div style={{fontWeight: 600, fontSize: "0.85rem"}}>{f.name}</div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeFile(i);
+                      }}
+                      style={{
+                        background: "rgba(239,68,68,0.1)",
+                        border: "1px solid rgba(239,68,68,0.3)",
+                        borderRadius: 6,
+                        padding: "4px 8px",
+                        cursor: "pointer",
+                        color: "#ef4444",
+                        fontSize: "0.75rem"
+                      }}
+                    >
+                      <FiX size={12} />
+                    </button>
+                  </div>
+                  <div className="small-muted" style={{marginBottom: 8}}>
+                    {Math.round(f.size/1024)} KB
+                  </div>
+                  <img src={URL.createObjectURL(f)} alt={f.name}/>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
-    )}
-  </AnimatePresence>
-</motion.div>
 
-
-      {/* BUILD & RENDER SECTION */}
       <motion.div variants={cardVariants} className="card">
         <div style={{display:"grid", gridTemplateColumns: "1fr 460px", gap: 24}}>
           <div>
@@ -944,7 +739,6 @@ export default function Page() {
               </button>
             </div>
 
-            {/* Status Display */}
             <div style={{
               padding: 18,
               background: "rgba(0,0,0,0.3)",
@@ -993,7 +787,7 @@ export default function Page() {
               </div>
               
               <div className="small-muted" style={{marginTop: 10}}>
-                Progress: {status?.progress ?? 0}% - {status?.status_message || "Waiting to start"}
+                Progress: {status?.progress ?? 0}% • {status?.status_message || "Waiting to start"}
               </div>
 
               {status?.status === "error" && (
@@ -1010,104 +804,3 @@ export default function Page() {
               )}
             </div>
           </div>
-
-          {/* Video Preview */}
-          <div>
-            <div style={{
-              display:"flex", 
-              justifyContent:"space-between", 
-              alignItems:"center",
-              marginBottom: 14
-            }}>
-              <div className="small-muted">Render Output</div>
-              {status?.status === "done" && (
-                <div style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  color: "#10b981",
-                  fontSize: "0.9rem"
-                }}>
-                  <FiCheckCircle />
-                  Complete
-                </div>
-              )}
-            </div>
-
-            <div className="card" style={{
-              background: "linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4))",
-              border: "1px solid rgba(255,255,255,0.08)",
-              minHeight: 300
-            }}>
-              {status?.status === "done" && jobId ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                >
-                  <video 
-                    controls 
-                    src={`${API_ROOT}/api/video/${jobId}`} 
-                    style={{
-                      width:"100%", 
-                      borderRadius: 12,
-                      marginBottom: 14
-                    }} 
-                  />
-                  <div style={{display:"flex", gap: 10}}>
-                    <a 
-                      className="btn btn-primary" 
-                      href={`${API_ROOT}/api/video/${jobId}`} 
-                      download
-                      style={{flex: 1, justifyContent: "center"}}
-                    >
-                      <FiDownload/> Download
-                    </a>
-                    <button 
-                      className="btn btn-ghost" 
-                      onClick={()=>{ 
-                        navigator.clipboard.writeText(`${window.location.origin}/api/video/${jobId}`); 
-                        alert("Copied video URL"); 
-                      }}
-                    >
-                      <FiCopy/> Copy Link
-                    </button>
-                  </div>
-                </motion.div>
-              ) : (
-                <div style={{
-                  height: 300, 
-                  display:"flex", 
-                  alignItems:"center", 
-                  justifyContent:"center",
-                  flexDirection: "column",
-                  gap: 16
-                }}>
-                  {status?.status === "building" ? (
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    >
-                      <FiFilm size={56} style={{opacity: 0.3}} />
-                    </motion.div>
-                  ) : (
-                    <FiFilm size={56} style={{opacity: 0.2}} />
-                  )}
-                  <div style={{textAlign: "center"}}>
-                    <div style={{fontWeight: 700, fontSize: 18, marginBottom: 8}}>
-                      {status?.status === "building" ? "Rendering..." : "No render yet"}
-                    </div>
-                    <div className="small-muted">
-                      {status?.status === "building" 
-                        ? "This may take a minute depending on images" 
-                        : "Start build to render the video"}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
