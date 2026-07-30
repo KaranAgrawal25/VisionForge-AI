@@ -5,3 +5,4 @@ node_modules/
 backend/app/final_video.mp4
 backend/app/*temp*
 backend/app/.env
+
