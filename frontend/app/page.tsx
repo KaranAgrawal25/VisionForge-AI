@@ -8,7 +8,7 @@ const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || "http://localhost:8000";
 
 type Scene = { narration: string; image_prompt: string };
 
-// Animation variants
+
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
