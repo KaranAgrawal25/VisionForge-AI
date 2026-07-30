@@ -5,7 +5,7 @@ node_modules/
 backend/app/final_video.mp4
 backend/app/*temp*
 backend/app/.env
-# Environment files (do NOT commit)
+
 .env
 .env.*
 *.env
