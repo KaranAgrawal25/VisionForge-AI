@@ -122,5 +122,4 @@ It demonstrates modern AI capabilities for storytelling, filmmaking, automation,
 ## 🏅 Credits
 
 Project by **Karan Agrawal**  
-Created for **Google 5 Days of AI Agent Challenge**
 
