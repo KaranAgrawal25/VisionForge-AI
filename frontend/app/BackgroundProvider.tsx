@@ -15,6 +15,7 @@ export default function BackgroundProvider({ children }: { children: React.React
       const dpr = window.devicePixelRatio || 1;
       pC.width = Math.floor(window.innerWidth * dpr);
       pC.height = Math.floor(window.innerHeight * dpr);
+      
       wC.width = Math.floor(window.innerWidth * dpr);
       wC.height = Math.floor(window.innerHeight * dpr);
       pC.style.width = "100%";
