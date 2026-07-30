@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Diagnostic script to verify the video_engine module
-Run this to check if the function signature is correct
-"""
+
 
 import inspect
 import sys
