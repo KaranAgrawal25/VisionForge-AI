@@ -1,7 +1,4 @@
-"""
-FastAPI Backend for VideoGPT
-Handles video generation requests
-"""
+
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
