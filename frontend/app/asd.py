@@ -17,6 +17,7 @@ const cardVariants = {
   }
 };
 
+
 const staggerChildren = {
   visible: {
     transition: {
