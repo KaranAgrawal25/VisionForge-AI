@@ -166,6 +166,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   fontWeight: 700,
                   color: "#a78bfa"
                 }}>
+                  
                   <FiZap size={14} />
                   AI-POWERED CINEMATIC VIDEO CREATION
                 </div>
