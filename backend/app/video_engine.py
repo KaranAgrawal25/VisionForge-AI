@@ -16,9 +16,7 @@ from moviepy.editor import (
 import textwrap
 import re
 
-# -------------------------
-# CONFIG
-# -------------------------
+
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
